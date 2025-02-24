@@ -1,3 +1,13 @@
+import EmptyStateDesktop from "@/components/EmptyStateDesktop";
+import EmptyStateMobile from "@/components/EmptyStateMobile";
+
 export default function Home() {
-  return <h1>Página Inicial</h1>;
+  return (
+    <main className="bg-white" role="main">
+      <div className="mx-auto">
+        <EmptyStateDesktop />
+        <EmptyStateMobile />
+      </div>
+    </main>
+  );
 }
