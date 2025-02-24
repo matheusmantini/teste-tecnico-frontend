@@ -1,5 +1,8 @@
 import EmptyStateDesktop from "@/components/EmptyStateDesktop";
 import EmptyStateMobile from "@/components/EmptyStateMobile";
+import { NotFound } from "@/components/NotFoundError";
+import UserProfileDesktop from "@/components/UserProfileDesktop";
+import UserProfileMobile from "@/components/UserProfileMobile";
 import { getGithubColors } from "@/services/getGithubColors";
 import { getGithubReposData } from "@/services/getGithubReposData";
 import { getGithubUserData } from "@/services/getGithubUserData";
@@ -22,12 +25,27 @@ const Home: React.FC<iProps> = ({
   return (
     <main className="bg-white" role="main">
       <div className="mx-auto">
-        <EmptyStateDesktop />
-        <EmptyStateMobile />
+        {error && <NotFound />}
+
+        {!userResponse && !error && (
+          <>
+            <EmptyStateDesktop />
+            <EmptyStateMobile />
+          </>
+        )}
+
+        {userResponse && (
+          <section className="hidden sm:flex flex-col lg:flex-row sm:gap-[50px]">
+            <>
+              <UserProfileDesktop userData={userResponse} />
+              <UserProfileMobile userData={userResponse} />
+            </>
+          </section>
+        )}
       </div>
     </main>
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { username } = context.query;
