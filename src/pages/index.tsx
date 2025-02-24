@@ -1,6 +1,8 @@
 import EmptyStateDesktop from "@/components/EmptyStateDesktop";
 import EmptyStateMobile from "@/components/EmptyStateMobile";
 import { NotFound } from "@/components/NotFoundError";
+import { RepoList } from "@/components/RepoList";
+import { SearchBar } from "@/components/SearchBar";
 import UserProfileDesktop from "@/components/UserProfileDesktop";
 import UserProfileMobile from "@/components/UserProfileMobile";
 import { getGithubColors } from "@/services/getGithubColors";
@@ -27,11 +29,28 @@ const Home: React.FC<iProps> = ({
       <div className="mx-auto">
         {error && <NotFound />}
 
-        {!userResponse && !error && (
+        {!userResponse && !error ? (
           <>
             <EmptyStateDesktop />
             <EmptyStateMobile />
           </>
+        ) : (
+          <section className="flex flex-col sm:hidden">
+            <div className="mx-[20px] mt-[32px]">
+              <SearchBar />
+            </div>
+            <div>
+              {userResponse && (
+                <>
+                  <UserProfileDesktop userData={userResponse} />
+                  <UserProfileMobile userData={userResponse} />
+                </>
+              )}
+              {reposResponse && (
+                <RepoList colors={colors} repos={reposResponse ?? []} />
+              )}
+            </div>
+          </section>
         )}
 
         {userResponse && (
@@ -40,6 +59,9 @@ const Home: React.FC<iProps> = ({
               <UserProfileDesktop userData={userResponse} />
               <UserProfileMobile userData={userResponse} />
             </>
+            <div className="flex-1 space-y-[50px]">
+              <RepoList colors={colors} repos={reposResponse ?? []} />
+            </div>
           </section>
         )}
       </div>

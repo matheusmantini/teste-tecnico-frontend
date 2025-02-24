@@ -3,6 +3,7 @@ import { Header } from "./Header";
 import { Poppins } from "next/font/google";
 import { iLayoutProps } from "@/types";
 import MenuMobile from "./MenuMobile";
+import { LayoutProvider } from "@/context/LayoutContext";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -12,6 +13,7 @@ const poppins = Poppins({
 
 const Layout = ({ children }: iLayoutProps) => {
   return (
+    <LayoutProvider>
       <div className={`${poppins.variable} font-sans`}>
         <Head>
           <title>Github Repos</title>
@@ -21,7 +23,8 @@ const Layout = ({ children }: iLayoutProps) => {
         <Header />
         {children}
         <MenuMobile />
-      </div>    
+      </div>{" "}
+    </LayoutProvider>
   );
 };
 
