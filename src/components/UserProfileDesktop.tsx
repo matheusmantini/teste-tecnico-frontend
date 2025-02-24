@@ -1,14 +1,17 @@
-import { iUserProfileProps } from "@/types/types";
+import { iUserProfileProps } from "@/types";
+import Image from "next/image";
 import React from "react";
 
 const UserProfileDesktop: React.FC<iUserProfileProps> = ({ userData }) => {
   return (
     <div className="lg:col-span-1 ml-6 mt-6 hidden sm:block">
       <div className="w-[448px] bg-white p-6 rounded-sm border border-light-gray">
-        <img
+        <Image
           src={userData.avatar_url}
           id="avatar"
           alt="Avatar"
+          width={200}
+          height={200}
           className="w-[200px] h-[200px] rounded-full mx-auto mb-4 object-cover"
         />
         <h2

@@ -1,4 +1,5 @@
-import { iUserProfileProps } from "@/types/types";
+import { iUserProfileProps } from "@/types";
+import Image from "next/image";
 import React from "react";
 
 const UserProfileMobile: React.FC<iUserProfileProps> = ({ userData }) => {
@@ -6,9 +7,11 @@ const UserProfileMobile: React.FC<iUserProfileProps> = ({ userData }) => {
     <div className="lg:col-span-1 px-4 pt-4 flex sm:hidden">
       <div className="w-full bg-white p-6 border border-light-gray rounded-lg">
         <div className="flex flex-row">
-          <img
+          <Image
             src={userData.avatar_url}
             alt="Avatar"
+            width={48}
+            height={48}
             className="w-[48px] h-[48px] rounded-full mx-auto mb-4 object-cover mr-2"
           />
           <span className="flex-1">
