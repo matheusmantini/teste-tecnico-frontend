@@ -52,7 +52,8 @@ export const getServerSideProps: GetServerSideProps<
         colors: response.data,
       },
     };
-  } catch (error) {
+  } catch (err) {
+    console.log(err);
     return {
       props: {
         colors: [],

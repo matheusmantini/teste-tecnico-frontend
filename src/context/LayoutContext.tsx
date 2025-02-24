@@ -21,7 +21,10 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favorites");
-    storedFavorites && setFavorites(JSON.parse(storedFavorites));
+
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
   }, []);
 
   useEffect(() => {

@@ -92,12 +92,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (err) {
+    const error = err instanceof Error ? err : new Error("Unknown error");
     return {
       props: {
         colors: [],
         userResponse: null,
         reposResponse: null,
-        error: "Erro ao buscar dados. Tente novamente mais tarde.",
+        error:
+          error?.message || "Erro ao buscar dados. Tente novamente mais tarde.",
       },
     };
   }
