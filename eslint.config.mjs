@@ -1,16 +1,19 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+// eslint.config.js
 import { FlatCompat } from "@eslint/eslintrc";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const compat = new FlatCompat();
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+export default [
+  ...compat.extends("next", "next/typescript"),
+  {
+    files: ["*.ts", "*.tsx"],
+    plugins: {
+      "@next/next": require("@next/eslint-plugin-next"),
+      react: require("eslint-plugin-react"),
+      "react-hooks": require("eslint-plugin-react-hooks"),
+    },
+    rules: {
+      "@next/next/no-img-element": "off",
+    },
+  },
 ];
-
-export default eslintConfig;
